@@ -21,3 +21,36 @@ export function isSameOrigin(url1: string, url2: string): boolean {
     return false;
   }
 }
+
+export function normalizeUrl(url: string): string {
+  try {
+    const parsed = new URL(url);
+
+    parsed.hostname = parsed.hostname.toLowerCase();
+
+    if (parsed.pathname !== "/") {
+      parsed.pathname = parsed.pathname.replace(/\/+$/, "");
+    }
+
+    if (
+      (parsed.protocol === "http:" && parsed.port === "80") ||
+      (parsed.protocol === "https:" && parsed.port === "443")
+    ) {
+      parsed.port = "";
+    }
+
+    if (parsed.search) {
+      const params = new URLSearchParams(parsed.search);
+      const sortedParams = new URLSearchParams(
+        Array.from(params.entries()).sort(),
+      );
+      parsed.search = sortedParams.toString();
+    }
+
+    parsed.hash = "";
+
+    return parsed.toString();
+  } catch {
+    return url;
+  }
+}
