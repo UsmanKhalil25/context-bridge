@@ -10,6 +10,8 @@ export class Browser {
   private context!: BrowserContext;
   private page!: Page;
 
+  constructor(private readonly headless: boolean) {}
+
   getPage(): Page {
     if (!this.page) {
       throw new Error("Browser not launched. Call launch() first.");
@@ -19,7 +21,7 @@ export class Browser {
 
   async launch() {
     this.browser = await chromium.launch({
-      headless: true,
+      headless: this.headless,
       args: [
         "--disable-web-security",
         "--no-sandbox",
