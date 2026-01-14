@@ -1,0 +1,7 @@
+{
+  "name": "context-bridge",
+  "private": true,
+  "workspaces": [
+    "*"
+  ]
+}

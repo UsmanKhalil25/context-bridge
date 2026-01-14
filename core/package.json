@@ -8,14 +8,14 @@
     "format:check": "prettier --check ."
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "prettier": "^3.7.4"
   },
   "peerDependencies": {
     "typescript": "^5"
   },
   "dependencies": {
     "commander": "^14.0.2",
-    "playwright": "^1.57.0",
-    "prettier": "^3.7.4"
+    "playwright": "^1.57.0"
   }
 }
