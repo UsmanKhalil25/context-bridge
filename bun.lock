@@ -4,6 +4,9 @@
   "workspaces": {
     "": {
       "name": "context-bridge",
+      "devDependencies": {
+        "prettier": "^3.7.4",
+      },
     },
     "app": {
       "name": "app",

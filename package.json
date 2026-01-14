@@ -1,7 +1,14 @@
 {
   "name": "context-bridge",
   "private": true,
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
   "workspaces": [
     "*"
-  ]
+  ],
+  "devDependencies": {
+    "prettier": "^3.7.4"
+  }
 }

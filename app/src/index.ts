@@ -1,9 +1,10 @@
 import { Hono } from "hono";
 
-const app = new Hono();
+import { CrawlsModule } from "./crawls";
 
-app.get("/", (context) => {
-  return context.text("Hello Hono!");
-});
+const app = new Hono();
+const crawlsModule = new CrawlsModule();
+
+app.route(`/api/${crawlsModule.path}`, crawlsModule.router);
 
 export default app;
