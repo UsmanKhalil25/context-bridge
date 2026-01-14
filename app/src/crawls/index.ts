@@ -1,1 +1,1 @@
-export * from "./crawls.module";
+export * from "./crawls.module.ts";
