@@ -1,4 +1,6 @@
+import * as z from "zod";
 import { Hono } from "hono";
+import { zValidator } from "@hono/zod-validator";
 
 export class CrawlsController {
   public app: Hono;
@@ -9,19 +11,22 @@ export class CrawlsController {
   }
 
   private registerRoutes() {
-    this.app.post("/", async (c) => {
-      const body = await c.req.json();
-      const url = body.url;
+    this.app.post(
+      "/",
+      zValidator(
+        "json",
+        z.object({
+          url: z.string().url(),
+        }),
+      ),
+      (c) => {
+        const validated = c.req.valid("json");
+        const url = validated.url;
 
-      if (!url) return c.json({ error: "URL is required" }, 400);
+        console.log(`Starting crawler for ${url}`);
 
-      console.log(`Starting crawler for ${url}`);
-
-      return c.json({ message: `Crawling started for ${url}` }, 201);
-    });
-
-    this.app.get("/status", (c) => {
-      return c.json({ status: "Crawler module is running" });
-    });
+        return c.json({ message: `Crawling started for ${url}` }, 201);
+      },
+    );
   }
 }
