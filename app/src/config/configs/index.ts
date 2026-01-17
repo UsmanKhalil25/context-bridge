@@ -1,2 +1,2 @@
-export { appConfig } from "./app.config";
-export { redisConfig } from "./redis.config";
+export * from "./app.config";
+export * from "./redis.config";

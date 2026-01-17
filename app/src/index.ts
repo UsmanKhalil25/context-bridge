@@ -1,7 +1,5 @@
 import { Hono } from "hono";
 
-import { configs } from "./config";
-
 import { CrawlsModule } from "./crawls";
 
 const app = new Hono();

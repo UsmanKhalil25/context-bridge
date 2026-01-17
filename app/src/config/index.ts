@@ -1,9 +1,13 @@
 import { configRegistry } from "./registry";
-import { appConfig, redisConfig } from "./configs";
+import { redisConfig, appConfig } from "./configs";
+import type { AppConfig, RedisConfig } from "./configs";
 
-(function registerConfigs() {
-  configRegistry.register(redisConfig);
-  configRegistry.register(appConfig);
-})();
+configRegistry.register(redisConfig);
+configRegistry.register(appConfig);
 
-export const configs = configRegistry.initConfigs(Bun.env);
+const allConfigs = configRegistry.initConfigs(Bun.env);
+
+export const configs = {
+  app: allConfigs.app as AppConfig,
+  redis: allConfigs.redis as RedisConfig,
+} as const;

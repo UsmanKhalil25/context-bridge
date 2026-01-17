@@ -1,11 +1,12 @@
 import { z } from "zod";
+
 import { Config } from "../types";
 
 const schema = z.object({
   REDIS_HOST: z.string().min(1),
   REDIS_PORT: z.coerce.number().int().positive(),
   REDIS_PASSWORD: z.string(),
-  REDIS_DB: z.string(),
+  REDIS_DB: z.coerce.number().int(),
 });
 
 type RedisEnv = z.infer<typeof schema>;
@@ -14,7 +15,7 @@ export type RedisConfig = {
   host: string;
   port: number;
   password: string;
-  db: string;
+  db: number;
 };
 
 export const redisConfig: Config<RedisEnv, RedisConfig> = {
