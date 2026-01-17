@@ -6,8 +6,6 @@ import { CrawlsModule } from "./crawls";
 
 const app = new Hono();
 
-console.log({ configs });
-
 const crawlsModule = new CrawlsModule();
 
 app.route(`/api/${crawlsModule.path}`, crawlsModule.router);

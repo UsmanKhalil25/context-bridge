@@ -4,8 +4,8 @@ import { Config } from "../types";
 const schema = z.object({
   REDIS_HOST: z.string().min(1),
   REDIS_PORT: z.coerce.number().int().positive(),
-  REDIS_PASSSWORD: z.string(),
-  REDIST_DB: z.string(),
+  REDIS_PASSWORD: z.string(),
+  REDIS_DB: z.string(),
 });
 
 type RedisEnv = z.infer<typeof schema>;
@@ -25,8 +25,8 @@ export const redisConfig: Config<RedisEnv, RedisConfig> = {
     return {
       host: parsed.REDIS_HOST,
       port: parsed.REDIS_PORT,
-      password: parsed.REDIS_PASSSWORD,
-      db: parsed.REDIST_DB,
+      password: parsed.REDIS_PASSWORD,
+      db: parsed.REDIS_DB,
     };
   },
 };
