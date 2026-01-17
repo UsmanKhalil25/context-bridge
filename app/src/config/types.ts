@@ -1,7 +1,7 @@
-import type { ZodSchema } from "zod";
+import type { ZodType } from "zod";
 
 export type Config<T, U> = {
   name: string;
-  schema: ZodSchema<T>;
+  schema: ZodType<T>;
   load: (env: Record<string, string | undefined>) => U;
 };

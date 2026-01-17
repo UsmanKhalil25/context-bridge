@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { Config } from "./types";
+import { Config } from "../types";
 
 const schema = z.object({
   REDIS_HOST: z.string().min(1),

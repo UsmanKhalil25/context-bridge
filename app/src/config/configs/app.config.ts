@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { Config } from "./types";
+import { Config } from "../types";
+import { configRegistry } from "../registry";
 
 const schema = z.object({
   PORT: z.coerce.number().int().positive().default(3000),

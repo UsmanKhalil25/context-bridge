@@ -1,16 +1,12 @@
 import { Hono } from "hono";
 
+import { configs } from "./config";
+
 import { CrawlsModule } from "./crawls";
-import { configMiddleware } from "./middlewares/config.middleware";
-import { configs, type AppConfig } from "./configs";
 
-type Variables = {
-  config: AppConfig;
-};
+const app = new Hono();
 
-const app = new Hono<{ Variables: Variables }>();
-
-app.use("*", configMiddleware(configs));
+console.log({ configs });
 
 const crawlsModule = new CrawlsModule();
 
