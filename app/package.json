@@ -7,10 +7,8 @@
   },
   "dependencies": {
     "@hono/zod-validator": "^0.7.6",
-    "bullmq": "^5.66.5",
     "core": "workspace:*",
     "hono": "^4.11.4",
-    "ioredis": "^5.9.1",
     "zod": "^4.3.5"
   },
   "devDependencies": {
