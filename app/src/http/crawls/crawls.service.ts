@@ -1,8 +1,6 @@
 import { Crawler } from "core";
 
-import { IBaseService } from "../base";
-
-export class CrawlsService implements IBaseService {
+export class CrawlsService {
   async crawl(url: string) {
     const crawler = new Crawler(url, false);
 

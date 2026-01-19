@@ -8,5 +8,3 @@ export interface IBaseModule {
 export interface IBaseController {
   readonly app: Hono;
 }
-
-export interface IBaseService {}
