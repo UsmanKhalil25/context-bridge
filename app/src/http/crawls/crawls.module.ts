@@ -1,9 +1,10 @@
 import { Hono } from "hono";
 
+import { IBaseModule } from "../base";
 import { CrawlsController } from "./crawls.controller";
 import { CrawlsService } from "./crawls.service";
 
-export class CrawlsModule {
+export class CrawlsModule implements IBaseModule {
   public readonly path = "crawls";
 
   private readonly controller: CrawlsController;

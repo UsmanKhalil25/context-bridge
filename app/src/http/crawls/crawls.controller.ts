@@ -2,9 +2,10 @@ import * as z from "zod";
 import { Hono } from "hono";
 import { zValidator } from "@hono/zod-validator";
 
+import { IBaseController } from "../base";
 import { CrawlsService } from "./crawls.service";
 
-export class CrawlsController {
+export class CrawlsController implements IBaseController {
   public app: Hono;
 
   constructor(private readonly crawlsService: CrawlsService) {
