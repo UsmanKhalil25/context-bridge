@@ -1,17 +1,16 @@
 import type { Config } from "./types";
 
 class ConfigRegistry {
-  private configs = new Map<string, Config<unknown, unknown>>();
+  private configs = new Map<string, Config<any>>();
 
   private getAll() {
     return Array.from(this.configs.values());
   }
 
-  register<EnvVars, ResolvedConfig>(module: Config<EnvVars, ResolvedConfig>) {
+  register<S extends Config<any>>(module: S) {
     if (this.configs.has(module.name)) {
       throw new Error(`Config "${module.name}" already registered`);
     }
-
     this.configs.set(module.name, module);
   }
 

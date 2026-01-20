@@ -1,6 +1,6 @@
 import { configRegistry } from "./registry";
-import { redisConfig, appConfig } from "./configs";
-import type { AppConfig, RedisConfig } from "./configs";
+import { type AppConfig, appConfig } from "./app";
+import { type RedisConfig, redisConfig } from "./redis";
 
 configRegistry.register(redisConfig);
 configRegistry.register(appConfig);
