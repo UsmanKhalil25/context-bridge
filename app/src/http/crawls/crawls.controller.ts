@@ -4,11 +4,15 @@ import { zValidator } from "@hono/zod-validator";
 
 import { IBaseController } from "../base";
 import { CrawlsService } from "./crawls.service";
+import { CrawlsQueue } from "./crawls.queue";
 
 export class CrawlsController implements IBaseController {
   public app: Hono;
 
-  constructor(private readonly crawlsService: CrawlsService) {
+  constructor(
+    private readonly crawlsService: CrawlsService,
+    private readonly crawlsQueue: CrawlsQueue,
+  ) {
     this.app = new Hono();
     this.registerRoutes();
   }
@@ -26,9 +30,9 @@ export class CrawlsController implements IBaseController {
         const validated = c.req.valid("json");
         const url = validated.url;
 
-        await this.crawlsService.crawl(url);
+        await this.crawlsQueue.addJob({ url });
 
-        return c.json({ message: `Crawling started for ${url}` }, 201);
+        return c.json({ message: `Crawl job enqueued for ${url}` }, 201);
       },
     );
   }
