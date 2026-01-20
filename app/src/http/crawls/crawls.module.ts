@@ -5,6 +5,7 @@ import { CrawlsController } from "./crawls.controller";
 import { CrawlsService } from "./crawls.service";
 import { CrawlsQueue } from "./crawls.queue";
 import { CrawlsWorker } from "./crawls.worker";
+import { configs } from "../../configs";
 
 export class CrawlsModule implements IBaseModule {
   public readonly path = "crawls";
@@ -16,7 +17,7 @@ export class CrawlsModule implements IBaseModule {
 
   constructor() {
     this.crawlsQueue = this.createQueue();
-    this.crawlsService = this.createService();
+    this.crawlsService = this.createService(configs.crawler.headless);
     this.crawlsController = this.createController(
       this.crawlsService,
       this.crawlsQueue,
@@ -24,7 +25,7 @@ export class CrawlsModule implements IBaseModule {
     this.crawlsWorker = this.createWorker(
       this.crawlsService,
       this.crawlsQueue,
-      concurrency,
+      configs.crawler.concurrency,
     );
   }
 
@@ -32,8 +33,8 @@ export class CrawlsModule implements IBaseModule {
     return new CrawlsQueue();
   }
 
-  private createService() {
-    return new CrawlsService();
+  private createService(headless: boolean) {
+    return new CrawlsService(headless);
   }
 
   private createController(service: CrawlsService, queue: CrawlsQueue) {
